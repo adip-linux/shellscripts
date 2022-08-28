@@ -1,0 +1,17 @@
+#!/bin/bash
+echo "This script will create logical volumes on virtual Hard Disks"
+parted /dev/sda mklabel msdos
+parted /dev/sda mkpart primary 1 800m
+parted /dev/sda print
+parted /dev/sdb mklabel msdos
+parted /dev/sdb mkpart primary 1 800m
+parted /dev/sdb print
+echo "Partitions are created"
+echo "======================"
+echo "Will now add to Volume group"
+pvcreate /dev/sda1 /dev/sdb1 -v
+vgcreate -vs 4 vgscript /dev/sda1 /dev/sdb1
+lvcreate -vL 400 -n lvscript1 vgscript
+lvcreate -vL 400 -n lvscript2 vgscript
+lvcreate -vL 400 -n lvscript1 vgscript
+echo "this has completed the excercise. Make a snapshot at this point"
