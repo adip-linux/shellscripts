@@ -1,4 +1,5 @@
 #!/bin/bash
+#use lsblk to see where the disks are located
 echo "This script will create logical volumes on virtual Hard Disks"
 parted /dev/sda mklabel msdos
 parted /dev/sda mkpart primary 1 800m
