@@ -1,0 +1,18 @@
+#!/bin/bash
+echo "this script will create file systems in the /mnt directory"
+mkdir /mnt/xfs
+mkdir /mnt/ext4
+mkdir /mnt/vfat
+echo "first we will create the xfs FS and add to fstab"
+mkfs -t xfs /dev/vgscript/lvscript1
+echo "/dev/vgscript/lvscript1   /mnt/xfs        xfs     defaults        0 0" >> /etc/fstab
+echo "Now we will do the ext4 FS"
+mkfs -t ext4 /dev/vgscript/lvscript2
+echo "/dev/vgscript/lvscript2   /mnt/ext4       ext4    defaults        0 0" >> /etc/fstab
+echo "finally we will create the vfat for stinky windows users"
+mkfs -t vfat /dev/vgscript/lvscript3
+echo "/dev/vgscript/lvscript3   /mnt/vfat       vfat    defaults        0 0" >> /etc/fstab
+echo "Now we will mount all the file systems in the /mnt directory"
+mount -a
+echo "and finally we will bask at the work we have done"
+df -h
