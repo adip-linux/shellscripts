@@ -1,0 +1,6 @@
+#!/bin/bash
+#usage: findstats.sh $file in $directory. make the ~/stats directory before running
+echo "this will give you the stats of files in a directory"
+find $2 -name $1 -exec stat {} \; > ~stats/$1.stats
+cat ~/stats/$1.stats
+echo "this information will be saved as $1.stats in the ~/stats directory
